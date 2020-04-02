@@ -24,9 +24,6 @@ __zic_matched_subdir_list() {
     fi
     find -L "$dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
         | cut -b $(( ${length} + 2 ))- | command sed '/^$/d' | while read -r line; do
-      if [[ "${line[1]}" == "." ]]; then
-        continue
-      fi
       echo "$line"
     done
   else
@@ -40,9 +37,6 @@ __zic_matched_subdir_list() {
       find -L "$dir" -mindepth 1 -maxdepth 1 -type d \
           2>/dev/null | cut -b $(( ${length} + 2 ))- | command sed '/^$/d' \
           | while read -r line; do
-        if [[ "${seg[1]}" != "." && "${line[1]}" == "." ]]; then
-          continue
-        fi
         if [[ "$line" == "$seg"* ]]; then
           echo "$line"
         fi
@@ -54,9 +48,6 @@ __zic_matched_subdir_list() {
       find -L "$dir" -mindepth 1 -maxdepth 1 -type d \
           2>/dev/null | cut -b $(( ${length} + 2 ))- | command sed '/^$/d' \
           | while read -r line; do
-        if [[ "${seg[1]}" != "." && "${line[1]}" == "." ]]; then
-          continue
-        fi
         if [[ "$line" == *"$seg"* ]]; then
           echo "$line"
         fi
